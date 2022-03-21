@@ -1,0 +1,143 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+  {% if user.is_authenticated %}
+  Hi {{ user.username }}!
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+  Todo list Hi {{ user.username }}!
+
+  <h1>Registered Users</h1>
+  {% for user in user_list %}
+  <h5>{{ user.username }}</h5>
+  {% endfor %}
+
+
+  <!-- title row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <div class="page-header"><h1>Add a ToDo</h1></div>
+    </div>
+  </div>
+
+  <!-- Add a todo row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <form method="post" action="{% url 'todos:add' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="title" placeholder="Do laundry" required>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" name="submit" class="btn btn-outline-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- todo list row -->
+  <h1>ToDo List</h1>
+  <div class="row">
+    <div class="offset-md-2 col-lg-6">
+      <div class="list-group">
+        {% for todo in todo_list %}
+        <div class="list-group-item {% if todo.isCompleted %} todo-complete {% endif %}">
+          <form style="display: inline;" method="post" action="{% url 'todos:update' todo.id %}">
+            {% csrf_token %}
+            <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {% if todo.isCompleted %} checked
+              {% endif %} class="todo-status-checkbox"
+              title="{% if not todo.isCompleted %} mark as done {% else %} mark undone {% endif %}">
+          </form>
+          {{ todo.title }} created by:{{ todo.user }}
+
+          <a href="{% url 'todos:details' todo.id %}" title="Details">Show Details </a>
+
+          <a href="{% url 'todos:delete' todo.id %}" title="Delete">
+            <i class="far fa-trash-alt"></i>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- todo list row -->
+  <h1>You created the following items</h1>
+  <div class="row">
+    <div class="offset-md-2 col-lg-6">
+      <div class="list-group">
+        {% for todo in todos_created_by_user_list %}
+ <p>{{todo.title}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Add a todo row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <form method="post" action="{% url 'todos:addassignment' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6">
+            <!-- <p>worker</p>
+            <input type="text" class="form-control" name="worker" placeholder="Do laundry" required>
+            <p>worker</p> -->
+
+            <!-- <option value="">---------</option>
+            {% for worker in worker_list %}
+            <option value="{{ worker }}">{{ worker.name }}</option>
+            {% endfor %} -->
+
+
+            <select name="user" id="user">
+              {% for user in user_list %}
+              <option value="{{ user.id }}">{{ user.username }}</option>
+              {% endfor %}
+              <!-- <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option> -->
+            </select>
+
+            <select name="todo" id="todo">
+              {% for todo in todo_list %}
+              <option value="{{ todo.id }}">{{ todo.title }}</option>
+              {% endfor %}
+              <!-- <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option> -->
+            </select>
+
+
+
+
+
+            <!-- <input type="text" class="form-control" name="todo" placeholder="Do laundry" required> -->
+          </div>
+          <div class="col-md-6">
+            <button type="submit" name="submit" class="btn btn-outline-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <a href="{% url 'todos:pdf'%}" title="pdf">Create PDF</a>
+
+{% endblock %}

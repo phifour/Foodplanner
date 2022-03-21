@@ -1,0 +1,48 @@
+{% extends 'planner/base.html' %}
+{% block content %}
+<div class="container">
+
+
+<h2>Ingredients to buy:</h2>
+
+
+
+<form method="get"> 
+    <!-- <input type="text" name="search" autocomplete="off" required>  -->
+    <select name="search" id="todo">
+        <option selected value="{{ search_field.id }}">{{search_field.name }}</option>
+        {% for incredient in incredient_list %}
+        <option value="{{ incredient.id }}">{{ incredient.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Search"> 
+</form>
+              
+
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Incredient</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Type</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for recipie in recipies %}
+    <tr>
+      <td>{{ recipie.name }}</td>
+      <td>{{ incredient.id }}</td>
+      <td>{{ incredient.id }}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  
+
+{% endblock %}

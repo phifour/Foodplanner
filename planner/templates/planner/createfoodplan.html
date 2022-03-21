@@ -1,0 +1,21 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+  <h1>Create Food Plan</h1>
+  
+  {% load crispy_forms_tags %}
+
+  <form method="post" class="uniForm" action="{% url 'planner:func_create_foodplan' %}">
+    {% csrf_token %}
+    {{ form |crispy}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+
+
+{% endblock %}

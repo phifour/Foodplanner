@@ -1,0 +1,180 @@
+{% extends 'planner/base.html' %}
+
+
+
+{% block content %}
+
+
+  <div class="container">
+    <br>
+    <br>
+
+
+
+    <!-- 
+    <form method="get"> 
+      {{ form }}
+      <input type="submit" value="Submit">
+    </form>
+  -->
+
+
+
+
+    {% load crispy_forms_tags %}
+
+
+    
+    <form method="get" class="uniForm">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  
+
+
+
+<!-- 
+    <form method="get">
+        <div class="form-group">
+        {{ filter.form.as_p }}
+    </div>
+        <input type="submit" /> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+-->
+<h1>Test:{{ page_obj }}</h1>
+
+
+
+<h4>You selected: Max cook time {{cooktime}}, {{dosnotcontain}}, max incredients: {{number_of_incredients_max}}</h4>
+
+
+
+<!-- 
+    <form>
+      <div method="get" class="form-group">
+        <div class="form-group">
+          <label for="maxcookingtime">Max Cooking time in minutes</label>
+          <select class="form-control" id="maxcookingtime" name="cooktime">
+            <option selected value={{cooktime}}>{{cooktime}}</option>        
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+            <option value="60">60</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="maxcookingtime">Max Number of Ingredients</label>
+          <select class="form-control" id="maxcookingtime" name="number_of_incredients_max">
+            <option selected value={{number_of_incredients_max}}>{{number_of_incredients_max}}</option>        
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="30">30</option>
+
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="maxcookingtime">Does not Contain</label>
+          <select class="form-control" id="dosnotcontain" name="dosnotcontain">
+            <option selected value={{dosnotcontain}}>{{dosnotcontain}}</option>        
+            <option value="Salz">Salz</option>
+            <option value="Pfeffer">Pfeffer</option>
+            <option value="Milch">Milch</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <input class="form-check-input" type="checkbox" value="True" id="flexCheckDefault" name="field1">
+          <label class="form-check-label" for="flexCheckDefault">
+            Default checkbox
+          </label>
+        </div>
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+
+ -->
+
+
+
+
+
+
+  <!-- <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form> -->
+
+
+
+
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Incredient</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Type</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for recipe in page_obj %}
+      <tr>
+        <td><a href="{% url 'todos:showrecipie' recipe.id %}">{{ recipe.name }}</a></td>
+        <td>{{ recipe }}</td>
+        <td>{{ recipe }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<br>
+
+
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}&cooktime={{ cooktime}}&dosnotcontain={{dosnotcontain}}&nosalt={{nosalt}}">previous</a>
+      {% endif %}
+      
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&cooktime={{ cooktime}}&dosnotcontain={{dosnotcontain}}&nosalt={{nosalt}}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}&cooktime={{ cooktime}}&dosnotcontain={{dosnotcontain}}&nosalt={{nosalt}}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,239 @@
+
+<!-- 
+<div class="row">
+  <div class="offset-md-2 col-lg-9">
+    <div class="page-header"><h1>Your Workers</h1></div>
+  </div>
+</div>
+  {% for worker in worker_list %}
+  <h5>{{ worker.name }}</h5>
+  <a href="{% url 'todos:deleteworker' worker.id %}" title="Delete">
+    <i class="far fa-trash-alt"></i>
+  </a>
+  {% endfor %}
+
+  <p>You Created the Following Todos</p>
+
+ {% for x in your_todo_ist %}
+  <h5>{{ x.title }}</h5>
+  <h5>{{ x.user }}</h5>
+
+  {% endfor %}
+
+
+<h1>Add Worker</h1>
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <form method="post" action="{% url 'todos:addworker' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="name" placeholder="Peter" required>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" name="submit" class="btn btn-outline-primary">
+              Add Worker
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr />
+
+  {% for worker in workers %}
+  <h1>{{ worker.name }}</h1>
+  <a href="{% url 'todos:deleteworker' worker.id %}" title="Delete">
+    <i class="far fa-trash-alt"></i>
+  </a>
+  {% endfor %}
+title row -->
+
+
+
+
+
+
+<h1>Registered Users</h1>
+
+{% for user in user_list %}
+<h5>{{ user.username }}</h5>
+{% endfor %}
+
+  <!-- title row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <div class="page-header">
+        <h1>
+          Add a ToDo
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add a todo row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <form method="post" action="{% url 'todos:add' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="title" placeholder="Do laundry" required>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" name="submit" class="btn btn-outline-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr />
+
+
+
+
+  <!-- todo list row -->
+  <h1>Your todo list</h1>
+  <div class="row">
+    <div class="offset-md-2 col-lg-6">
+      <div class="list-group">
+        {% for todo in todo_list %}
+        <div class="list-group-item {% if todo.isCompleted %} todo-complete {% endif %}">
+          <form style="display: inline;" method="post" action="{% url 'todos:update' todo.id %}">
+            {% csrf_token %}
+            <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {% if todo.isCompleted %} checked
+              {% endif %} class="todo-status-checkbox"
+              title="{% if not todo.isCompleted %} mark as done {% else %} mark undone {% endif %}">
+          </form>
+          {{ todo.title }} created by:{{ todo.user }}
+          <a href="{% url 'todos:delete' todo.id %}" title="Delete">
+            <i class="far fa-trash-alt"></i>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- Add a todo row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-9">
+      <form method="post" action="{% url 'todos:addassignment' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6">
+            <!-- <p>worker</p>
+            <input type="text" class="form-control" name="worker" placeholder="Do laundry" required>
+            <p>worker</p> -->
+
+            <!-- <option value="">---------</option>
+            {% for worker in worker_list %}
+            <option value="{{ worker }}">{{ worker.name }}</option>
+            {% endfor %} -->
+
+
+            <select name="worker" id="worker">
+              {% for worker in worker_list %}
+              <option value="{{ worker.id }}">{{ worker.name }}</option>
+              {% endfor %}
+              <!-- <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option> -->
+            </select>
+
+            <select name="todo" id="todo">
+              {% for todo in todo_list %}
+              <option value="{{ todo.id }}">{{ todo.title }}</option>
+              {% endfor %}
+              <!-- <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option> -->
+            </select>
+
+
+
+
+
+            <!-- <input type="text" class="form-control" name="todo" placeholder="Do laundry" required> -->
+          </div>
+          <div class="col-md-6">
+            <button type="submit" name="submit" class="btn btn-outline-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr />
+
+
+
+
+<h1>List of assignments</h1>
+<h1>Your todo list</h1>
+<div class="row">
+  <div class="offset-md-2 col-lg-6">
+    <div class="list-group">
+      {% for assignment in assignments_list %}
+      <div class="list-group-item">
+        {{ assignment}},worker:{{ assignment.worker}},todo:{{ assignment.todo}}
+        <a href="{% url 'todos:deleteassignment' assignment.id %}" title="Delete">
+          <i class="far fa-trash-alt"></i>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+  <!-- {% for assignment in assignments_list %}
+  <h1>{{ assignment }}</h1>
+  <a href="{% url 'todos:deleteassignment' assignment.id %}" title="Delete">
+    <i class="far fa-trash-alt"></i>
+  </a>
+  {% endfor %} -->
+
+
+
+<!-- {% for assignment in assignments_list %}
+<p> assignment.name : {{ assignment.name }}</p>
+<p>{{ assignment.worker }}</p> 
+<p>{{ assignment.todo }}</p>
+{% endfor %} -->
+
+
+
+
+
+{% for key, value in kkk.items %}
+Task: {{key}}
+<h5>Assigned Workers:</h5>
+{% for x in value %}
+<h1>{{x}}</h1>
+
+<div>
+<a href="{% url 'todos:deleteworker' x.id %}" title="Delete">
+  <i class="far fa-trash-alt"></i>
+</a>
+</div>
+
+
+{% endfor %}
+
+
+{% endfor %}
+
+

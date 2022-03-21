@@ -1,0 +1,41 @@
+{% extends 'planner/base.html' %}
+
+{% block title %}
+<title>Todo list Hi {{ user.username }}!</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>My ToDos</h1>
+<div class="container">
+
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ToDo</th>
+        <th scope="col">Assigned to User</th>
+        <th scope="col">Created by User</th>
+        <th scope="col">Creation date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in mytodos_list %}
+      <tr>
+        <td>{{ todo.todo }}</td>
+        <td>{{ todo.assigned_to_user }}</td>
+        <td>{{ todo.created_by_user }}</td>
+        <td>{{ todo.created_at }}</td>
+      </tr>
+      {% endfor %}
+
+
+    </tbody>
+  </table>
+
+
+</div>
+
+
+
+{% endblock %}

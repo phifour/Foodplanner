@@ -1,0 +1,45 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+  <h1>{{recipie}}</h1>
+
+
+  <img src={{recipie.image_link}} alt={{recipie.name}} width="250" height="250">
+<br>
+<br>
+<br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Incredient</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Type</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for incredient in ingredients_total_list %}
+      <tr>
+        <td>{{ incredient.incredient }}</td>
+        <td>{{ incredient.quantity }}</td>
+        <td>{{ incredient.type }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  
+  <p>{{recipie.preparation}}</p>
+
+
+  
+  
+
+
+
+{% endblock %}

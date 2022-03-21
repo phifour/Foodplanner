@@ -1,0 +1,87 @@
+{% extends 'planner/base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+  <h1>Welcome to Foodplaner {{ user.username }}!</h1>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Recipie</th>
+        <th scope="col">Date</th>
+        <th scope="col">Calories per Portion</th>
+        <th scope="col">Cook Time</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for meal in my_food_plan %}
+      <tr>
+        <!-- <td>{{ meal.recipe }}</td> -->
+        <td><a href="{% url 'planner:showrecipie' meal.recipe.id %}">{{ meal.recipe }}</a></td>
+        <td>{{ meal.date|date:'Y-m-d' }}</td>
+        <td>{{ meal.recipe.cooktime}}</td>
+        <td><a href="{% url 'planner:removerecipefrommealplan' meal.id %}" title="Delete"><i class="far fa-trash-alt"></i></a></td>
+        <td>
+        <form style="display: inline;" method="post" action="{% url 'planner:updaterecipefrommealplan' meal.id %}">
+            {% csrf_token %}
+
+            <select class="form-select form-select-lg mb-3" name="recipe" id="recipe">
+                {% for recipe in recipes_list %}
+                <option value="{{ recipe.id }}">{{ recipe.name }}</option>
+                {% endfor %}
+              </select>
+              <!-- <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select> -->
+
+
+
+            <button type="submit" name="submit" class="btn btn-outline-primary">Change foodplan</button>
+          </form>
+        </td>
+   
+    </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <h2>Ingredients to buy:</h2>
+    
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Incredient</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Type</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for incredient in ingredients_total_list %}
+      <tr>
+        <td>{{ incredient.incredient }}</td>
+        <td>{{ incredient.quantity }}</td>
+        <td>{{ incredient.type }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+
+  
+
+
+
+{% endblock %}
