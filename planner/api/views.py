@@ -8,6 +8,10 @@ from .serializers import CurrentUserSerializer, IngredientSerializer, RecipeSeri
 from .serializers import Recipe_Ingredient_Mapping, Recipe_Ingredient_MappingSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 
 # class TodoListApiView(APIView):
@@ -42,9 +46,6 @@ from django.contrib.auth import get_user_model
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 # def snippet_list(request):
 

@@ -2,7 +2,6 @@
 # todo/api/urls.py : API urls.py
 #from django.conf.urls import url
 from django.urls import re_path as url
-
 from django.urls import path, include
 #from .views import TodoListApiView
 from .views import list_users, incredient_list, recipie_list,recipie_add_incredient
