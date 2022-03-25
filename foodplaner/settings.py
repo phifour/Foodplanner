@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'planner.apps.PlannerConfig',
-    'crispy_forms',
+  #  'crispy_forms',
     'rest_framework'
 ]
 
