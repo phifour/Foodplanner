@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=2j)a@#vg#n!ix&1d297$ge5rw%yte878@yx6ytz+28u77e558'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False#True
+DEBUG = True#True
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
@@ -40,8 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'planner.apps.PlannerConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'rest_framework'
 ]
+
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,15 +1,8 @@
 # todo/api/serializers.py
 from rest_framework import serializers
-from todos.models import Todo, Ingredient, Recipe,Recipe_Ingredient_Mapping
+from planner.models import Ingredient, Recipe,Recipe_Ingredient_Mapping
 from django.contrib.auth.models import User
-from taggit.serializers import (TagListSerializerField,TaggitSerializer)
-
-class TodoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Todo
-        fields = ["title","user"]
-        #fields = ('__all__')
-
+#from taggit.serializers import (TagListSerializerField,TaggitSerializer)
 
 class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +22,6 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ('name','type','id','link','image_link','cooktime','number_of_incredients','preparation','incredientstext')
-
 
 
 class Recipe_Ingredient_MappingSerializer(serializers.ModelSerializer):

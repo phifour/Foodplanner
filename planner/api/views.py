@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from todos.models import Todo, Ingredient, Recipe
-from .serializers import TodoSerializer, CurrentUserSerializer, IngredientSerializer, RecipeSerializer
+from planner.models import Ingredient, Recipe
+from .serializers import CurrentUserSerializer, IngredientSerializer, RecipeSerializer
 from .serializers import Recipe_Ingredient_Mapping, Recipe_Ingredient_MappingSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model

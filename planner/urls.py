@@ -18,5 +18,7 @@ urlpatterns = [
     path('<int:recipie_id>/showrecipie/', views.showrecipie, name='showrecipie'),
     path('findrecipe/', views.findrecipe, name='findrecipe'),
     path('recipefilter/', views.recipie_filter, name='recipie_filter'),
-    path('test/', views.test, name='test')
+    path('test/', views.test, name='test'),
+    path('api/', include('planner.api.urls')),
+
 ]

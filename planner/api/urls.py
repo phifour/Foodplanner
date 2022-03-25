@@ -1,9 +1,11 @@
 # myapi/urls.py
 # todo/api/urls.py : API urls.py
-from django.conf.urls import url
+#from django.conf.urls import url
+from django.urls import re_path as url
+
 from django.urls import path, include
 #from .views import TodoListApiView
-from .views import todo_list, list_users, incredient_list, recipie_list,recipie_add_incredient
+from .views import list_users, incredient_list, recipie_list,recipie_add_incredient
 from rest_framework.urlpatterns import format_suffix_patterns
 
 
@@ -13,7 +15,6 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # ]
 
 urlpatterns = [
-    path('list/', todo_list),
     path('list_users/', list_users),
     path('list_incredient/', incredient_list),
     path('list_recipie/', recipie_list),
