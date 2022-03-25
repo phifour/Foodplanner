@@ -1,4 +1,4 @@
-from tkinter.tix import INTEGER
+#from tkinter.tix import INTEGER
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from .models import Recipe_Ingredient_Mapping, Recipe, Ingredient, Mealplan, RecipeFilter
