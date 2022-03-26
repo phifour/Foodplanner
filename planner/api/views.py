@@ -47,26 +47,6 @@ from rest_framework.response import Response
 
 
 
-# def snippet_list(request):
-
-@api_view(['GET', 'POST'])
-def todo_list(request, format=None):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        snippets = Todo.objects.all()
-        serializer = TodoSerializer(snippets, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = TodoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['GET', 'POST'])
 def incredient_list(request, format = None):
     """
