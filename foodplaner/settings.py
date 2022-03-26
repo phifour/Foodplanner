@@ -104,10 +104,11 @@ DATABASES = {
 }
 
 
-#ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
-ALLOWED_HOSTS = ALLOWED_HOSTS.append('127.0.0.1')
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
+#ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
+#ALLOWED_HOSTS = ALLOWED_HOSTS.append('127.0.0.1')
 
+print(ALLOWED_HOSTS)
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
